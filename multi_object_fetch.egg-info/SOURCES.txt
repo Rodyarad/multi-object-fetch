@@ -1,0 +1,14 @@
+README.md
+setup.py
+multi_object_fetch/__init__.py
+multi_object_fetch/env.py
+multi_object_fetch.egg-info/PKG-INFO
+multi_object_fetch.egg-info/SOURCES.txt
+multi_object_fetch.egg-info/dependency_links.txt
+multi_object_fetch.egg-info/requires.txt
+multi_object_fetch.egg-info/top_level.txt
+multi_object_fetch/assets/__init__.py
+multi_object_fetch/assets/generate_multi_camera_xml.py
+multi_object_fetch/utils/__init__.py
+multi_object_fetch/utils/gui.py
+multi_object_fetch/utils/parser.py

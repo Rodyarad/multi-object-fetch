@@ -3,6 +3,13 @@ import random
 import os
 import gym
 import numpy as np
+
+if not hasattr(gym, "GoalEnv"):
+    from gym import Env
+    class GoalEnv(Env):
+        pass
+    gym.GoalEnv = GoalEnv
+
 from fetch_block_construction.envs.robotics.fetch.construction import FetchBlockConstructionEnv
 from fetch_block_construction.envs.robotics import fetch_env
 from gym import utils as gym_utils
@@ -27,7 +34,7 @@ def prepare_fetch_assets() -> Path:
     return cache_dir
 
 
-class ColorsMixin(ABC):
+class ColorsMixin:
     @property
     def colors(self) -> np.ndarray:
         return np.array([(0, 255, 0),
@@ -116,7 +123,7 @@ class ColorsMixin(ABC):
         return self.delta_e_cie2000(red_lab, color_lab)
 
 
-class MultiObjectFetchEnv(fetch_env.FetchEnv, gym_utils.EzPickle, ColorsMixin, ABC):
+class MultiObjectFetchEnv(fetch_env.FetchEnv, gym_utils.EzPickle, ColorsMixin):
     def __init__(self, initial_qpos: Dict[str, Any], obs_type: str = "dictstate", object_size: float = 0.045,
                  target_size: float = 0.04, robot_configuration: str = "default", viewpoint: str = "frontview",
                  randomize_background_color: bool = False, randomize_table_color: bool = False) -> None:
@@ -165,7 +172,6 @@ class MultiObjectFetchEnv(fetch_env.FetchEnv, gym_utils.EzPickle, ColorsMixin, A
             # original image is upside-down, so flip it
             return self.sim.render(size[0], size[1], camera_name=self.viewpoint)[::-1, :, :].copy()
 
-    @abstractmethod
     def success(self) -> bool:
         pass
 
