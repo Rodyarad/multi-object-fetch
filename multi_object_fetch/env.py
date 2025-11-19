@@ -177,7 +177,7 @@ class MultiObjectFetchEnv(fetch_env.FetchEnv, gym_utils.EzPickle, ColorsMixin):
 
     def step(self, action):
         obs, reward, done, info = super().step(action)
-        info["success"] = self.success()
+        info["is_success"] = self.success()
         return obs, reward, done, info
 
     def _reset_sim(self):
